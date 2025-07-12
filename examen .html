@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panadería Asunción - Llallagua, Potosí</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+    <style id="app-style">
+        :root {
+            --primary: #8B4513;
+            --secondary: #D2B48C;
+            --accent: #CD853F;
+            --light: #F5F5DC;
+            --dark: #3E2723;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, .navbar-brand {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .navbar {
+            background-color: rgba(62, 39, 35, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            color: var(--light);
+        }
+
+        .nav-link {
+            color: var(--light);
+            transition: all 0.3s;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        /* Wood texture backgrounds */
+        .wood-bg {
+            background-image: url('https://cdn.pixabay.com/photo/2015/12/03/08/50/wood-1074862_1280.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .wood-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(62, 39, 35, 0.7);
+            z-index: 0;
+        }
+        
+        .wood-bg > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Hero section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: url('https://cdn.pixabay.com/photo/2016/03/27/21/59/bread-1284438_1280.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin: 1rem auto 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Cards for mission, vision, history */
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .feature-card .card-body {
+            padding: 1.5rem;
+        }
+        
+        .feature-card .card-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Products section */
+        .product-filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .product-card .card-body {
+            padding: 1.5rem;
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        /* Order form */
+        .order-form {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .order-summary {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+        
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .total-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        /* About us section */
+        .about-img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 15px;
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.1);
+            background-color: var(--accent);
+        }
+        
+        .social-icon.tiktok {
+            background: linear-gradient(45deg, #000, #69C9D0, #EE1D52);
+        }
+        
+        .social-icon.facebook {
+            background-color: #3b5998;
+        }
+        
+        .social-icon.whatsapp {
+            background-color: #25D366;
+        }
+        
+        /* Footer */
+        footer {
+            color: var(--light);
+        }
+        
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: white;
+        }
+        
+        /* Custom section padding */
+        .section-padding {
+            padding: 5rem 0;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-padding {
+                padding: 3rem 0;
+            }
+        }
+        
+        /* Animation */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#inicio">Panadería Asunción</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#productos">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pedido">Pedido</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nosotros">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#redes">Redes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container hero-content">
+            <h1 class="mb-3">Panadería Asunción</h1>
+            <p class="lead">Tradición y sabor desde 1985. Panes artesanales horneados con amor en Llallagua, Potosí.</p>
+            <a href="#productos" class="btn btn-lg btn-primary">Ver Nuestros Panes</a>
+        </div>
+    </section>
+
+    <!-- Features Section (Mission, Vision, History) -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card fade-in">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/29/05/07/breads-1867459_1280.jpg" alt="Misión">
+                        <div class="card-body">
+                            <h3 class="card-title">Misión</h3>
+                            <p>Elaborar panes artesanales de la más alta calidad, manteniendo nuestras recetas tradicionales y contribuyendo al bienestar de nuestra comunidad en Llallagua.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card fade-in">
+                        <img src="https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg" alt="Visión">
+                        <div class="card-body">
+                            <h3 class="card-title">Visión</h3>
+                            <p>Ser reconocidos como la mejor panadería de la región, innovando constantemente pero respetando nuestras raíces y tradiciones panaderas bolivianas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card fade-in">
+                        <img src="https://cdn.pixabay.com/photo/2021/07/19/16/04/pizza-6478478_1280.jpg" alt="Historia">
+                        <div class="card-body">
+                            <h3 class="card-title">Historia</h3>
+                            <p>Fundada en 1985 por la familia Mamani, Panadería Asunción comenzó como un pequeño emprendimiento familiar que ha crecido hasta convertirse en un referente de la panadería tradicional en Llallagua.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="productos" class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5">Nuestros Productos</h2>
+            
+            <div class="product-filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="artesanales">Artesanales</button>
+                <button class="filter-btn" data-filter="dulces">Dulces</button>
+                <button class="filter-btn" data-filter="especiales">Especiales</button>
+            </div>
+            
+            <div class="row g-4" id="productGrid">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form Section -->
+    <section id="pedido" class="section-padding wood-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="order-form">
+                        <h2 class="text-center mb-4">Realizar Pedido</h2>
+                        
+                        <div class="order-summary mb-4">
+                            <h4>Resumen de tu Pedido</h4>
+                            <div id="orderItems">
+                                <!-- Order items will be displayed here -->
+                                <div class="empty-order text-center py-3">
+                                    <p class="mb-0">No has seleccionado productos aún</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <strong>Total:</strong>
+                                <div class="total-price">Bs. 0.00</div>
+                            </div>
+                        </div>
+                        
+                        <form id="orderForm">
+                            <div class="mb-3">
+                                <label for="fullname" class="form-label">Nombre completo</label>
+                                <input type="text" class="form-control" id="fullname" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" id="phone" pattern="[0-9]+" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label d-block">Tipo de entrega</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="deliveryType" id="delivery" value="delivery" checked>
+                                    <label class="form-check-label" for="delivery">Entrega a domicilio</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="deliveryType" id="pickup" value="pickup">
+                                    <label class="form-check-label" for="pickup">Recoger en tienda</label>
+                                </div>
+                            </div>
+                            <div class="mb-3" id="addressField">
+                                <label for="address" class="form-label">Dirección</label>
+                                <input type="text" class="form-control" id="address" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="comments" class="form-label">Comentarios opcionales</label>
+                                <textarea class="form-control" id="comments" rows="3"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg" disabled id="submitOrder">
+                                    Enviar Pedido
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="nosotros" class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5">Sobre Nosotros</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <img src="https://cdn.pixabay.com/photo/2016/11/21/16/21/bakery-1846431_1280.jpg" alt="Interior de la panadería" class="about-img">
+                </div>
+                <div class="col-lg-7">
+                    <div class="mb-4">
+                        <h3>Nuestra Misión</h3>
+                        <p>En Panadería Asunción, nuestra misión es elaborar panes artesanales de la más alta calidad, utilizando ingredientes frescos y locales. Nos dedicamos a mantener vivas las recetas tradicionales de nuestra región, contribuyendo así al bienestar y la satisfacción de nuestra comunidad en Llallagua.</p>
+                    </div>
+                    <div class="mb-4">
+                        <h3>Nuestra Visión</h3>
+                        <p>Aspiramos a ser reconocidos como la mejor panadería de la región, innovando constantemente pero respetando nuestras raíces y tradiciones panaderas bolivianas. Buscamos expandir nuestra oferta y llegar a más hogares, sin perder jamás la esencia y el sabor que nos caracteriza.</p>
+                    </div>
+                    <div>
+                        <h3>Nuestra Historia</h3>
+                        <p>Fundada en 1985 por la familia Leon, Panadería Asunción comenzó como un pequeño emprendimiento familiar en un modesto local en Llallagua. Con dedicación y pasión por la panadería tradicional, logramos ganarnos el corazón de los vecinos, quienes pronto se convirtieron en fieles clientes.</p>
+                        <p>A lo largo de los años, hemos crecido considerablemente, ampliando nuestras instalaciones y diversificando nuestra oferta de productos, pero manteniendo siempre la calidad y el amor por lo que hacemos como nuestro principal ingrediente. Hoy, tres generaciones de la familia continúan con esta hermosa tradición, combinando técnicas ancestrales con toques de innovación.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section id="redes" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Síguenos en Redes</h2>
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <a href="javascript:void(0)" class="social-icon whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="social-icon tiktok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="social-icon facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fab fa-whatsapp fa-3x text-success mb-3"></i>
+                            <h4>WhatsApp</h4>
+                            <p>Envíanos tus pedidos directamente por WhatsApp</p>
+                            <a href="javascript:void(0)" class="btn btn-success" id="whatsappOrder">
+                                <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fab fa-tiktok fa-3x mb-3"></i>
+                            <h4>TikTok</h4>
+                            <p>Síguenos en TikTok para ver nuestras recetas y procesos</p>
+                            <div class="tiktok-embed">
+                                <img src="https://cdn.pixabay.com/photo/2017/08/10/14/09/restaurant-2623071_1280.jpg" alt="TikTok Preview" class="img-fluid rounded">
+                                <p class="mt-2">@PanaderiaAsuncion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fab fa-facebook fa-3x text-primary mb-3"></i>
+                            <h4>Facebook</h4>
+                            <p>Visita nuestra página de Facebook para novedades y ofertas</p>
+                            <div class="facebook-preview">
+                                <img src="https://cdn.pixabay.com/photo/2017/03/27/13/36/bread-2178874_1280.jpg" alt="Facebook Page Preview" class="img-fluid rounded">
+                                <p class="mt-2">Panadería Asunción - Oficial</p>
+                            </div>
+                            <a href="javascript:void(0)" class="btn btn-primary mt-2">
+                                <i class="fab fa-facebook-f"></i> Seguir en Facebook
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="wood-bg py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h4 class="text-white">Panadería Asunción</h4>
+                    <p>Avenida Santa Cruz<br>Llallagua, Potosí<br>Bolivia</p>
+                    <p><i class="fas fa-phone"></i> +591 75414707</p>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h4 class="text-white">Horario de Atención</h4>
+                    <p>Lunes a Viernes: 7:00 - 20:00<br>
+                       Sábados: 7:00 - 18:00<br>
+                       Domingos: 8:00 - 14:00</p>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="text-white">Enlaces Rápidos</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#pedido">Pedido</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#redes">Redes Sociales</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-white mt-4">
+                <p>&copy; <span id="currentYear"></span> Panadería Asunción. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Order Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pedido Enviado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-check-circle text-success fa-4x mb-3"></i>
+                    <p>¡Gracias por tu pedido! Te contactaremos pronto para confirmarlo.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Volver al inicio</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <div class="spinner-border text-primary mb-3" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                    </div>
+                    <p class="mb-0">Procesando tu pedido...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script id="app-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Products data
+            const products = [
+                {
+                    id: 1,
+                    name: "Pan Marraqueta",
+                    description: "Pan tradicional boliviano crujiente por fuera y esponjoso por dentro.",
+                    price: 0.50,
+                    image: "https://cdn.pixabay.com/photo/2019/03/24/14/23/bread-4077812_1280.jpg",
+                    category: "artesanales"
+                },
+                {
+                    id: 2,
+                    name: "Pan Francés",
+                    description: "El clásico pan de cada día con una corteza dorada.",
+                    price: 0.30,
+                    image: "https://cdn.pixabay.com/photo/2016/03/27/21/59/bread-1284438_1280.jpg",
+                    category: "artesanales"
+                },
+                {
+                    id: 3,
+                    name: "Pan de Queso",
+                    description: "Delicioso pan con queso derretido en su interior.",
+                    price: 1.50,
+                    image: "https://cdn.pixabay.com/photo/2016/03/26/18/23/bread-1281053_1280.jpg",
+                    category: "especiales"
+                },
+                {
+                    id: 4,
+                    name: "Cuñapé",
+                    description: "Panecillos de queso y harina de yuca, tradicionales del oriente boliviano.",
+                    price: 1.20,
+                    image: "https://cdn.pixabay.com/photo/2021/01/16/09/05/meal-5921491_1280.jpg",
+                    category: "especiales"
+                },
+                {
+                    id: 5,
+                    name: "Empanada de Queso",
+                    description: "Empanada al horno rellena de queso fundido.",
+                    price: 1.80,
+                    image: "https://cdn.pixabay.com/photo/2022/03/02/13/42/empanada-7043964_1280.jpg",
+                    category: "especiales"
+                },
+                {
+                    id: 6,
+                    name: "Pan de Canela",
+                    description: "Pan dulce con espirales de canela y azúcar.",
+                    price: 2.00,
+                    image: "https://cdn.pixabay.com/photo/2015/03/26/09/39/cinnamon-rolls-690426_1280.jpg",
+                    category: "dulces"
+                },
+                {
+                    id: 7,
+                    name: "Buñuelos",
+                    description: "Tradicionales buñuelos fritos cubiertos con miel.",
+                    price: 1.00,
+                    image: "https://cdn.pixabay.com/photo/2017/01/30/13/56/pancakes-2020863_1280.jpg",
+                    category: "dulces"
+                },
+                {
+                    id: 8,
+                    name: "Pan Integral",
+                    description: "Pan saludable elaborado con harinas integrales.",
+                    price: 1.50,
+                    image: "https://cdn.pixabay.com/photo/2017/06/23/23/57/bread-2436370_1280.jpg",
+                    category: "artesanales"
+                },
+                {
+                    id: 9,
+                    name: "Facturas Dulces",
+                    description: "Variedad de facturas dulces con diferentes rellenos.",
+                    price: 1.20,
+                    image: "https://cdn.pixabay.com/photo/2016/03/27/22/38/cake-1284548_1280.jpg",
+                    category: "dulces"
+                }
+            ];
+            
+            // Load products
+            const productGrid = document.getElementById('productGrid');
+            
+            function displayProducts(category = 'all') {
+                productGrid.innerHTML = '';
+                
+                products.forEach(product => {
+                    if (category === 'all' || product.category === category) {
+                        const productHTML = `
+                            <div class="col-md-6 col-lg-4">
+                                <div class="product-card">
+                                    <img src="${product.image}" alt="${product.name}" class="img-fluid">
+                                    <div class="card-body">
+                                        <h4>${product.name}</h4>
+                                        <p>${product.description}</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="product-price">Bs. ${product.price.toFixed(2)}</span>
+                                            <button class="btn btn-primary add-to-cart" data-id="${product.id}">
+                                                Agregar al pedido
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        productGrid.innerHTML += productHTML;
+                    }
+                });
+                
+                // Attach event listeners to "Add to cart" buttons
+                document.querySelectorAll('.add-to-cart').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const productId = parseInt(this.getAttribute('data-id'));
+                        addToCart(productId);
+                    });
+                });
+            }
+            
+            // Initial product display
+            displayProducts();
+            
+            // Filter buttons functionality
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active filter button
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Display filtered products
+                    displayProducts(filter);
+                });
+            });
+            
+            // Cart functionality
+            let cart = [];
+            
+            function addToCart(productId) {
+                const product = products.find(p => p.id === productId);
+                
+                if (!product) return;
+                
+                const existingItem = cart.find(item => item.id === productId);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        quantity: 1
+                    });
+                }
+                
+                updateCartDisplay();
+                updateOrderButtonState();
+            }
+            
+            function removeFromCart(productId) {
+                cart = cart.filter(item => item.id !== productId);
+                updateCartDisplay();
+                updateOrderButtonState();
+            }
+            
+            function updateCartDisplay() {
+                const orderItems = document.getElementById('orderItems');
+                const totalPrice = document.querySelector('.total-price');
+                
+                if (cart.length === 0) {
+                    orderItems.innerHTML = `
+                        <div class="empty-order text-center py-3">
+                            <p class="mb-0">No has seleccionado productos aún</p>
+                        </div>
+                    `;
+                    totalPrice.textContent = 'Bs. 0.00';
+                    return;
+                }
+                
+                let total = 0;
+                orderItems.innerHTML = '';
+                
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
+                    orderItems.innerHTML += `
+                        <div class="order-summary-item">
+                            <div>
+                                <strong>${item.name}</strong> x ${item.quantity}
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">Bs. ${itemTotal.toFixed(2)}</div>
+                                <button class="btn btn-sm btn-outline-danger remove-item" data-id="${item.id}">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                totalPrice.textContent = `Bs. ${total.toFixed(2)}`;
+                
+                // Attach event listeners to remove buttons
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const productId = parseInt(this.getAttribute('data-id'));
+                        removeFromCart(productId);
+                    });
+                });
+            }
+            
+            // Order form functionality
+            const orderForm = document.getElementById('orderForm');
+            const submitOrderBtn = document.getElementById('submitOrder');
+            
+            function updateOrderButtonState() {
+                submitOrderBtn.disabled = cart.length === 0;
+            }
+            
+            // Toggle address field based on delivery type
+            document.querySelectorAll('input[name="deliveryType"]').forEach(input => {
+                input.addEventListener('change', function() {
+                    const addressField = document.getElementById('addressField');
+                    const addressInput = document.getElementById('address');
+                    
+                    if (this.value === 'pickup') {
+                        addressField.style.display = 'none';
+                        addressInput.removeAttribute('required');
+                    } else {
+                        addressField.style.display = 'block';
+                        addressInput.setAttribute('required', '');
+                    }
+                });
+            });
+            
+            // Form submission
+            orderForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading modal
+                const loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'));
+                loadingModal.show();
+                
+                // Simulate API call
+                setTimeout(() => {
+                    loadingModal.hide();
+                    
+                    // Show confirmation
+                    const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+                    confirmationModal.show();
+                    
+                    // Reset form and cart
+                    orderForm.reset();
+                    cart = [];
+                    updateCartDisplay();
+                    updateOrderButtonState();
+                }, 1500);
+            });
+            
+            // WhatsApp order functionality
+            document.getElementById('whatsappOrder').addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Por favor, selecciona al menos un producto para hacer un pedido por WhatsApp.');
+                    return;
+                }
+                
+                alert('Esta es una versión prototipo. En la versión final, este botón te permitirá enviar tu pedido por WhatsApp directamente.');
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                    
+                    // Close mobile menu if open
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarCollapse.classList.remove('show');
+                    }
+                });
+            });
+            
+            // Observe sections for animation
+            const sections = document.querySelectorAll('.section-padding');
+            
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('fade-in');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+            } else {
+                // Fallback for browsers that don't support IntersectionObserver
+                sections.forEach(section => {
+                    section.classList.add('fade-in');
+                });
+            }
+        });
+    </script>
+</body>
+<style>html{
+ color:darkviolet;
+ font-size:25px;
+ font-weight:600;
+}
+</style><script>/*Here write your javascript code*/
+</script></html>
